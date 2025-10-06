@@ -46,8 +46,10 @@ export class RegisterComponent {
     this.loading = true;
     try {
       await this.authService.register(this.email, this.password);
-      // Navigate to todo list if success
-      this.router.navigate(['/todos']);
+      // Small delay to ensure auth state is updated
+      setTimeout(() => {
+        this.router.navigate(['/todos']);
+      }, 100);
     } catch (error: any) {
       this.errorMessage = this.getErrorMessage(error.code);
     } finally {

@@ -47,4 +47,14 @@ export class AuthService {
   getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
+
+    // Wait for auth state to be ready
+  waitForAuthReady(): Promise<User | null> {
+    return new Promise((resolve) => {
+      const subscription = this.user$.subscribe(user => {
+        subscription.unsubscribe();
+        resolve(user);
+      });
+    });
+  }
 }
