@@ -1,26 +1,47 @@
+/* Global Styles - Damotech Theme */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #fff 0%, #fff5f0 100%);
+  color: #333;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
 /* Authentication Pages Styles */
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f38b3c 0%, #ff6b35 100%);
   padding: 20px;
 }
 
 .auth-card {
   background: white;
   padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(243, 139, 60, 0.3);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
 
   h2 {
     margin: 0 0 30px 0;
     color: #333;
     text-align: center;
-    font-size: 28px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #f38b3c;
   }
 }
 
@@ -37,17 +58,18 @@
 
   input {
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    padding: 14px 18px;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
     font-size: 15px;
+    font-family: 'Roboto', sans-serif;
     transition: all 0.3s ease;
     box-sizing: border-box;
 
     &:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      border-color: #f38b3c;
+      box-shadow: 0 0 0 4px rgba(243, 139, 60, 0.1);
     }
 
     &:disabled {
@@ -62,30 +84,33 @@
 }
 
 .error-message {
-  background-color: #fee;
-  color: #c33;
-  padding: 12px 16px;
-  border-radius: 8px;
+  background-color: #fff5f5;
+  color: #e53e3e;
+  padding: 14px 18px;
+  border-radius: 10px;
   margin-bottom: 20px;
   font-size: 14px;
-  border-left: 4px solid #c33;
+  border-left: 4px solid #e53e3e;
+  font-weight: 500;
 }
 
 .btn-primary {
   width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 16px;
+  background: linear-gradient(135deg, #f38b3c 0%, #ff6b35 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(243, 139, 60, 0.3);
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 25px rgba(243, 139, 60, 0.4);
   }
 
   &:disabled {
@@ -101,17 +126,19 @@
 
 .auth-link {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 24px;
   color: #666;
   font-size: 14px;
 
   a {
-    color: #667eea;
+    color: #f38b3c;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     margin-left: 5px;
+    transition: color 0.3s ease;
 
     &:hover {
+      color: #ff6b35;
       text-decoration: underline;
     }
   }
