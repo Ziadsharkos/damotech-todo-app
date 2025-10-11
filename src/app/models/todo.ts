@@ -1,9 +1,9 @@
 export interface Todo {
-  id?: string;              // Firestore document ID (optional, set after creation)
-  title: string;            // Task title
+  id?: string;              // document ID (optional, set after creation)
+  title: string;
   description?: string;
-  completed: boolean;       // Task status
-  userId: string;           // Who's task
-  createdAt: Date;          // When created
-  updatedAt: Date;          // When last modified
+  completed: boolean;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

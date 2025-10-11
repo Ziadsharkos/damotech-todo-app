@@ -33,17 +33,16 @@ export class TodoListComponent implements OnInit, OnDestroy {
     // Wait for auth state to be ready before loading todos
     this.authService.user$.subscribe(user => {
       if (user) {
-        console.log('✅ User authenticated, loading todos');
+        console.log('User authenticated, loading todos');
         this.loadTodos();
       } else {
-        console.log('❌ No user, redirecting to login');
+        console.log('No user, redirecting to login');
         this.router.navigate(['/login']);
       }
     });
   }
 
   ngOnDestroy() {
-    // Clean up subscription to prevent memory leaks
     this.todosSubscription?.unsubscribe();
   }
 
@@ -51,13 +50,13 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.todosSubscription = this.todoService.getTodos().subscribe({
       next: (todos) => {
-        console.log('📦 Todos loaded:', todos);
+        console.log('Todos loaded:', todos);
         this.todos = todos;
         this.applyFilter();
         this.loading = false;
       },
       error: (error) => {
-        console.error('❌ Error loading todos:', error);
+        console.error('Error loading todos:', error);
         this.loading = false;
       }
     });

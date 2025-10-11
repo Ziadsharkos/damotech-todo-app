@@ -6,14 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  // Emits the current user (or null if logged out)
+  // follows the current user
   user$: Observable<User | null>;
 
   constructor(private auth: Auth) {
     this.user$ = user(this.auth);
   }
 
-  // Create a new user account
   async register(email: string, password: string): Promise<void> {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password);
@@ -23,7 +22,6 @@ export class AuthService {
     }
   }
 
-  // Sign in existing user
   async login(email: string, password: string): Promise<void> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
@@ -33,7 +31,6 @@ export class AuthService {
     }
   }
 
-  // Sign out current user
   async logout(): Promise<void> {
     try {
       await signOut(this.auth);
@@ -43,7 +40,7 @@ export class AuthService {
     }
   }
 
-  // Get current user snapshot
+  // user snapshot
   getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
