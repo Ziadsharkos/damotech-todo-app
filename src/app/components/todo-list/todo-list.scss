@@ -10,14 +10,30 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
-  padding: 0 10px;
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 2px solid rgba(243, 139, 60, 0.1);
 
-  h1 {
-    font-size: 42px;
-    font-weight: 700;
-    color: #f38b3c;
-    margin: 0;
-    letter-spacing: -0.5px;
+  .header-branding {
+    .brand-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: #f38b3c;
+      margin: 0 0 4px 0;
+      letter-spacing: -0.5px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .page-title {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
   }
 }
 
