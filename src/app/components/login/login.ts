@@ -26,7 +26,6 @@ export class LoginComponent {
     // Reset error message
     this.errorMessage = '';
 
-    // Validation
     if (!this.email || !this.password) {
       this.errorMessage = 'Email and password are required';
       return;
@@ -38,10 +37,8 @@ export class LoginComponent {
       await this.authService.login(this.email, this.password);
       // Wait for auth state to update
       await this.authService.waitForAuthReady();
-      // Now navigate
       this.router.navigate(['/todos']);
     } catch (error: any) {
-      // Show error to user
       this.errorMessage = this.getErrorMessage(error.code);
     } finally {
       this.loading = false;
