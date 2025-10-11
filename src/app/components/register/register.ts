@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { AuthService } from '../../services/auth';
 
 @Component({
@@ -20,8 +21,11 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Create Account - Damotech Task Manager');
+  }
 
   async onSubmit() {
     // Resets error message

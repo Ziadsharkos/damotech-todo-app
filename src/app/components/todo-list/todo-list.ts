@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser'
 import { Subscription } from 'rxjs';
 import { TodoService } from '../../services/todo';
 import { AuthService } from '../../services/auth';
@@ -26,8 +27,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
   constructor(
     private todoService: TodoService,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('My Tasks - Damotech Task Manager');
+  }
 
   ngOnInit() {
     // Wait for auth state to be ready before loading todos
