@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { TodoService } from '../../services/todo';
 import { AuthService } from '../../services/auth';
@@ -16,6 +17,13 @@ import { Todo } from '../../models/todo';
   styleUrl: './todo-list.scss'
 })
 export class TodoListComponent implements OnInit, OnDestroy {
+
+  private todoService = inject(TodoService);
+  private authService = inject(AuthService);
+  private cloudFunctionsService = inject(CloudFunctionsService);
+  private router = inject(Router);
+  private titleService = inject(Title);
+  
   todos: Todo[] = [];
   filteredTodos: Todo[] = [];
   newTodoTitle = '';
@@ -26,12 +34,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
   statsLoading = false;
   private todosSubscription?: Subscription;
 
-  constructor(
-    private todoService: TodoService,
-    private authService: AuthService,
-    private cloudFunctionsService: CloudFunctionsService,
-    private router: Router
-  ) {}
+  constructor() {
+    this.titleService.setTitle('My Tasks - Damotech Task Manager');
+  }
 
   ngOnInit() {
     // Wait for auth state to be ready before loading todos
