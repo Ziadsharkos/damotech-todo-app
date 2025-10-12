@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TodoService } from '../../services/todo';
 import { AuthService } from '../../services/auth';
+import { CloudFunctionsService, TaskStats } from '../../services/cloud-functions';
 import { Todo } from '../../models/todo';
 
 @Component({
@@ -21,11 +22,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
   newTodoDescription = '';
   filter: 'all' | 'active' | 'completed' = 'all';
   loading = false;
+  taskStats: TaskStats | null = null;
+  statsLoading = false;
   private todosSubscription?: Subscription;
 
   constructor(
     private todoService: TodoService,
     private authService: AuthService,
+    private cloudFunctionsService: CloudFunctionsService,
     private router: Router
   ) {}
 
@@ -35,6 +39,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
       if (user) {
         console.log('User authenticated, loading todos');
         this.loadTodos();
+        this.loadStats();
       } else {
         console.log('No user, redirecting to login');
         this.router.navigate(['/login']);
@@ -54,12 +59,37 @@ export class TodoListComponent implements OnInit, OnDestroy {
         this.todos = todos;
         this.applyFilter();
         this.loading = false;
+        this.loadStats();
       },
       error: (error) => {
         console.error('Error loading todos:', error);
         this.loading = false;
       }
     });
+  }
+  
+    /**
+   * Load task statistics from Cloud Function
+   */
+  async loadStats() {
+    this.statsLoading = true;
+    try {
+      this.taskStats = await this.cloudFunctionsService.getTaskStats();
+      console.log('Stats from Cloud Function:', this.taskStats);
+    } catch (error) {
+      console.error('Error loading stats from Cloud Function:', error);
+      // Fallback to local calculation
+      this.taskStats = {
+        total: this.todos.length,
+        active: this.activeCount,
+        completed: this.completedCount,
+        userId: this.authService.getCurrentUser()?.uid || '',
+        timestamp: new Date().toISOString()
+      };
+      console.log('Using local stats fallback:', this.taskStats);
+    } finally {
+      this.statsLoading = false;
+    }
   }
 
   async addTodo() {

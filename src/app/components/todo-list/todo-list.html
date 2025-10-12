@@ -6,11 +6,29 @@
   </div>
 
   <!-- Stats -->
-  <div class="todo-stats">
-    <span>{{ activeCount }} active</span>
-    <span>{{ completedCount }} completed</span>
-    <span>{{ todos.length }} total</span>
+<div class="todo-stats">
+  <div class="stat-item">
+    <span class="stat-label">Active Tasks</span>
+    <span class="stat-value">
+      {{ statsLoading ? '...' : (taskStats?.active || activeCount) }}
+    </span>
   </div>
+  <div class="stat-item">
+    <span class="stat-label">Completed</span>
+    <span class="stat-value">
+      {{ statsLoading ? '...' : (taskStats?.completed || completedCount) }}
+    </span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-label">Total Tasks</span>
+    <span class="stat-value">
+      {{ statsLoading ? '...' : (taskStats?.total || todos.length) }}
+    </span>
+  </div>
+  <div class="stat-badge" *ngIf="taskStats">
+    <span title="Powered by Cloud Functions">Live Stats</span>
+  </div>
+</div>
 
   <!-- Add New Todo Form -->
   <div class="add-todo-form">
