@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser'
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { TodoService } from '../../services/todo';
 import { AuthService } from '../../services/auth';
+import { CloudFunctionsService, TaskStats } from '../../services/cloud-functions';
 import { Todo } from '../../models/todo';
 
 @Component({
@@ -16,20 +17,24 @@ import { Todo } from '../../models/todo';
   styleUrl: './todo-list.scss'
 })
 export class TodoListComponent implements OnInit, OnDestroy {
+
+  private todoService = inject(TodoService);
+  private authService = inject(AuthService);
+  private cloudFunctionsService = inject(CloudFunctionsService);
+  private router = inject(Router);
+  private titleService = inject(Title);
+  
   todos: Todo[] = [];
   filteredTodos: Todo[] = [];
   newTodoTitle = '';
   newTodoDescription = '';
   filter: 'all' | 'active' | 'completed' = 'all';
   loading = false;
+  taskStats: TaskStats | null = null;
+  statsLoading = false;
   private todosSubscription?: Subscription;
 
-  constructor(
-    private todoService: TodoService,
-    private authService: AuthService,
-    private router: Router,
-    private titleService: Title
-  ) {
+  constructor() {
     this.titleService.setTitle('My Tasks - Damotech Task Manager');
   }
 
@@ -39,6 +44,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
       if (user) {
         console.log('User authenticated, loading todos');
         this.loadTodos();
+        this.loadStats();
       } else {
         console.log('No user, redirecting to login');
         this.router.navigate(['/login']);
@@ -58,12 +64,37 @@ export class TodoListComponent implements OnInit, OnDestroy {
         this.todos = todos;
         this.applyFilter();
         this.loading = false;
+        this.loadStats();
       },
       error: (error) => {
         console.error('Error loading todos:', error);
         this.loading = false;
       }
     });
+  }
+  
+    /**
+   * Load task statistics from Cloud Function
+   */
+  async loadStats() {
+    this.statsLoading = true;
+    try {
+      this.taskStats = await this.cloudFunctionsService.getTaskStats();
+      console.log('Stats from Cloud Function:', this.taskStats);
+    } catch (error) {
+      console.error('Error loading stats from Cloud Function:', error);
+      // Fallback to local calculation
+      this.taskStats = {
+        total: this.todos.length,
+        active: this.activeCount,
+        completed: this.completedCount,
+        userId: this.authService.getCurrentUser()?.uid || '',
+        timestamp: new Date().toISOString()
+      };
+      console.log('Using local stats fallback:', this.taskStats);
+    } finally {
+      this.statsLoading = false;
+    }
   }
 
   async addTodo() {
