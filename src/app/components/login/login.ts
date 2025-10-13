@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from '../../services/auth';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
+})
+export class LoginComponent implements OnInit {
+  email = '';
+  password = '';
+  errorMessage = '';
+  loading = false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Sign In - Damotech Task Manager');
+  }
+
+   ngOnInit() {
+    // If already signed in go straight to todos
+    this.authService.user$.subscribe(user => {
+      if (user) this.router.navigate(['/todos']);
+    });
+  }
+
+    async onSubmit() {
+    // Reset error message
+    this.errorMessage = '';
+
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Email and password are required';
+      return;
+    }
+
+    // Login user
+    this.loading = true;
+    try {
+      await this.authService.login(this.email, this.password);
+      // Wait for auth state to update
+      await this.authService.waitForAuthReady();
+      this.router.navigate(['/todos']);
+    } catch (error: any) {
+      this.errorMessage = this.getErrorMessage(error.code);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  private getErrorMessage(errorCode: string): string {
+    switch (errorCode) {
+      case 'auth/user-not-found':
+      case 'auth/wrong-password':
+      case 'auth/invalid-credential':
+        return 'Invalid email or password';
+      case 'auth/invalid-email':
+        return 'Invalid email address';
+      case 'auth/user-disabled':
+        return 'This account has been disabled';
+      case 'auth/too-many-requests':
+        return 'Too many failed attempts. Please try again later.';
+      default:
+        return 'Login failed. Please try again.';
+    }
+  }
+}
