@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth';
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email = '';
   password = '';
   errorMessage = '';
@@ -24,6 +24,13 @@ export class LoginComponent {
     private titleService: Title
   ) {
     this.titleService.setTitle('Sign In - Damotech Task Manager');
+  }
+
+   ngOnInit() {
+    // If already signed in go straight to todos
+    this.authService.user$.subscribe(user => {
+      if (user) this.router.navigate(['/todos']);
+    });
   }
 
     async onSubmit() {

@@ -1,21 +1,16 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth';
-import { map, take } from 'rxjs/operators';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return authService.user$.pipe(
-    take(1),
-    map(user => {
-      if (user) {
-        return true;
-      } else {
-        router.navigate(['/login']);
-        return false;
-      }
-    })
-  );
+  // wait until Firebase resolves the persisted user
+  const user = await authService.waitForAuthReady();
+
+  if (user) return true;
+
+  router.navigate(['/login'], { queryParams: { redirect: state.url } });
+  return false;
 };
