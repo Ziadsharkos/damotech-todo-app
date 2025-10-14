@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+}
+
+:host(.auth-card) {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(243, 139, 60, 0.3);
+}
+
+:host(.auth-card) .card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(243, 139, 60, 0.3);
+}

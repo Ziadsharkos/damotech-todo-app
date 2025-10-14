@@ -1,0 +1,58 @@
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 2px solid rgba(243, 139, 60, 0.1);
+
+  .header-branding {
+    .brand-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: #f38b3c;
+      margin: 0 0 4px 0;
+      letter-spacing: -0.5px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .page-title {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.btn-logout {
+  padding: 12px 28px;
+  background: white;
+  color: #f38b3c;
+  border: 2px solid #f38b3c;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(243, 139, 60, 0.1);
+
+  &:hover {
+    background: #f38b3c;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(243, 139, 60, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-header .brand-name {
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,11 @@
+<div class="auth-container">
+  <dm-card class="auth-card">
+    <dm-header mode="brand"></dm-header>
+
+    <dm-login-form
+      [loading]="loading"
+      [errorMessage]="errorMessage"
+      (login)="onLogin($event)">
+    </dm-login-form>
+  </dm-card>
+</div>
