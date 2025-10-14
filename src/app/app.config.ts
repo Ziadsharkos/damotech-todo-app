@@ -26,10 +26,6 @@ export const appConfig: ApplicationConfig = {
       const auth = getAuth();
       if (typeof window !== 'undefined') {
         setPersistence(auth, browserLocalPersistence);
-        // If you want a more robust fallback chain, you can do:
-        // setPersistence(auth, indexedDBLocalPersistence).catch(() =>
-        //   setPersistence(auth, browserLocalPersistence)
-        // );
       }
       return auth;
     }),
