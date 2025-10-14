@@ -1,1 +1,32 @@
-<p>todos-page works!</p>
+<div class="todo-container">
+  <dm-header mode="todos" [showLogout]="true" (logout)="logout()"></dm-header>
+
+  <dm-todo-stats
+    [active]="statsLoading ? 0 : (taskStats?.active ?? activeCount)"
+    [completed]="statsLoading ? 0 : (taskStats?.completed ?? completedCount)"
+    [total]="statsLoading ? 0 : (taskStats?.total ?? todos.length)"
+    [loading]="statsLoading"
+    [showLive]="!!taskStats">
+  </dm-todo-stats>
+
+  <dm-todo-form [loading]="loading" (add)="addTodo($event)"></dm-todo-form>
+
+  <dm-todo-filters [value]="filter" (change)="setFilter($event)"></dm-todo-filters>
+
+  <div *ngIf="loading && todos.length === 0" class="loading">Loading tasks...</div>
+
+  <div *ngIf="!loading && filteredTodos.length === 0" class="empty-state">
+    <p *ngIf="filter === 'all'">No tasks yet. Add one above!</p>
+    <p *ngIf="filter === 'active'">No active tasks.</p>
+    <p *ngIf="filter === 'completed'">No completed tasks.</p>
+  </div>
+
+  <div class="todo-list">
+    <dm-todo-item
+      *ngFor="let todo of filteredTodos"
+      [todo]="todo"
+      (toggle)="onToggle(todo)"
+      (remove)="onDelete(todo)">
+    </dm-todo-item>
+  </div>
+</div>

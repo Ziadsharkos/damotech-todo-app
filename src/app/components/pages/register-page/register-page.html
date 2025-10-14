@@ -1,1 +1,11 @@
-<p>register-page works!</p>
+<div class="auth-container">
+  <dm-card class="auth-card">
+    <dm-header mode="brand"></dm-header>
+
+    <dm-register-form
+      [loading]="loading"
+      [errorMessage]="errorMessage"
+      (register)="onRegister($event)">
+    </dm-register-form>
+  </dm-card>
+</div>
