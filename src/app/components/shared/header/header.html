@@ -1,1 +1,13 @@
-<p>header works!</p>
+<div *ngIf="mode === 'brand'" class="brand-header">
+  <h1 class="brand-name">Damotech</h1>
+  <p class="brand-tagline">Task Management System</p>
+</div>
+
+<!-- Todos page header -->
+<div *ngIf="mode === 'todos'" class="todo-header">
+  <div class="header-branding">
+    <h1 class="brand-name">Damotech</h1>
+    <p class="page-title">Task Manager</p>
+  </div>
+  <button class="btn-logout" *ngIf="showLogout" (click)="logout.emit()">Logout</button>
+</div>
