@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-card',
-  imports: [],
+  selector: 'dm-card',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './card.html',
-  styleUrl: './card.scss'
+  styleUrls: ['./card.scss']
 })
-export class Card {
-
-}
+export class CardComponent {}
