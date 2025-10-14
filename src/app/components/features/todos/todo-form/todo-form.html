@@ -1,0 +1,26 @@
+<div class="add-todo-form">
+  <input
+    type="text"
+    class="input-title"
+    [disabled]="loading"
+    [(ngModel)]="title"
+    placeholder="What needs to be done?"
+    (keyup.enter)="submit()"
+  />
+  <input
+    type="text"
+    class="input-description"
+    [disabled]="loading"
+    [(ngModel)]="description"
+    placeholder="Description (optional)"
+    (keyup.enter)="submit()"
+  />
+  <button
+    class="btn-add"
+    (click)="submit()"
+    [disabled]="loading || !title.trim()"
+  >
+    <span *ngIf="!loading">Add Task</span>
+    <span *ngIf="loading">Adding...</span>
+  </button>
+</div>

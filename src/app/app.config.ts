@@ -1,4 +1,3 @@
-// app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
@@ -26,10 +25,6 @@ export const appConfig: ApplicationConfig = {
       const auth = getAuth();
       if (typeof window !== 'undefined') {
         setPersistence(auth, browserLocalPersistence);
-        // If you want a more robust fallback chain, you can do:
-        // setPersistence(auth, indexedDBLocalPersistence).catch(() =>
-        //   setPersistence(auth, browserLocalPersistence)
-        // );
       }
       return auth;
     }),

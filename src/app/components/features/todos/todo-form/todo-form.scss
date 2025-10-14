@@ -1,0 +1,63 @@
+.add-todo-form {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  border: 2px solid rgba(243, 139, 60, 0.1);
+
+  .input-title,
+  .input-description {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #f38b3c;
+      box-shadow: 0 0 0 4px rgba(243, 139, 60, 0.1);
+    }
+
+    &:disabled {
+      background: #f9f9f9;
+      cursor: not-allowed;
+    }
+  }
+
+  .input-title {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .btn-add {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #f38b3c 0%, #ff6b35 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(243, 139, 60, 0.3);
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(243, 139, 60, 0.4);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+}

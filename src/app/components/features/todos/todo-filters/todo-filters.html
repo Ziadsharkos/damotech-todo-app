@@ -1,0 +1,5 @@
+<div class="filter-buttons">
+  <button class="btn-filter" [class.active]="value==='all'" (click)="select('all')">All</button>
+  <button class="btn-filter" [class.active]="value==='active'" (click)="select('active')">Active</button>
+  <button class="btn-filter" [class.active]="value==='completed'" (click)="select('completed')">Completed</button>
+</div>
