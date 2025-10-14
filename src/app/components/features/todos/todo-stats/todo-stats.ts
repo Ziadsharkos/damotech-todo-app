@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-todo-stats',
-  imports: [],
+  selector: 'dm-todo-stats',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './todo-stats.html',
-  styleUrl: './todo-stats.scss'
+  styleUrls: ['./todo-stats.scss']
 })
-export class TodoStats {
-
+export class TodoStatsComponent {
+  @Input() active = 0;
+  @Input() completed = 0;
+  @Input() total = 0;
+  @Input() loading = false;
+  @Input() showLive = false;
 }

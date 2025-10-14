@@ -1,1 +1,17 @@
-<p>todo-stats works!</p>
+<div class="todo-stats">
+  <div class="stat-item">
+    <span class="stat-label">Active Tasks</span>
+    <span class="stat-value">{{ loading ? '...' : active }}</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-label">Completed</span>
+    <span class="stat-value">{{ loading ? '...' : completed }}</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-label">Total Tasks</span>
+    <span class="stat-value">{{ loading ? '...' : total }}</span>
+  </div>
+  <div class="stat-badge" *ngIf="showLive">
+    <span title="Powered by Cloud Functions">Live Stats</span>
+  </div>
+</div>

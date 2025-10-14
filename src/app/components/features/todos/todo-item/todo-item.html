@@ -1,1 +1,25 @@
-<p>todo-item works!</p>
+<div class="todo-item" [class.completed]="todo.completed">
+  <div class="todo-checkbox">
+    <input
+      type="checkbox"
+      [checked]="todo.completed"
+      [id]="'todo-' + todo.id"
+      (change)="toggle.emit()"
+    />
+    <label [for]="'todo-' + todo.id"></label>
+  </div>
+
+  <div class="todo-content">
+    <h3>{{ todo.title }}</h3>
+    <p *ngIf="todo?.description">{{ todo.description }}</p>
+    <small>{{ asDate(todo.createdAt) | date:'short' }}</small>
+  </div>
+
+  <button
+    class="btn-delete"
+    title="Delete task"
+    (click)="remove.emit()"
+  >
+    ×
+  </button>
+</div>
