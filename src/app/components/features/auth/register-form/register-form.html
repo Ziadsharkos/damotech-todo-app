@@ -1,1 +1,48 @@
-<p>register-form works!</p>
+<h2>Create Account</h2>
+
+<form (ngSubmit)="submit()" #registerForm="ngForm">
+  <dm-input-field
+    label="Email"
+    name="email"
+    type="email"
+    placeholder="Enter your email"
+    [required]="true"
+    [disabled]="loading"
+    [(model)]="email">
+  </dm-input-field>
+
+  <dm-input-field
+    label="Password"
+    name="password"
+    type="password"
+    placeholder="At least 6 characters"
+    [required]="true"
+    [disabled]="loading"
+    [(model)]="password">
+  </dm-input-field>
+
+  <dm-input-field
+    label="Confirm Password"
+    name="confirmPassword"
+    type="password"
+    placeholder="Confirm your password"
+    [required]="true"
+    [disabled]="loading"
+    [(model)]="confirmPassword">
+  </dm-input-field>
+
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <dm-button
+    type="submit"
+    [disabled]="loading || !email || !password || !confirmPassword"
+    variant="primary">
+    <span *ngIf="!loading">Create Account</span>
+    <span *ngIf="loading">Creating...</span>
+  </dm-button>
+
+  <p class="auth-link">
+    Already have an account?
+    <a routerLink="/login">Sign in</a>
+  </p>
+</form>
