@@ -65,7 +65,7 @@ export const onTaskCreated = onDocumentCreated(
       const msg = {
         to: userEmail,
         from: "patrickjanesalah@gmail.com",
-        subject: "✅ New Task Created - Damotech Task Manager",
+        subject: "New Task Created - Damotech Task Manager",
         text: `Your task "${title}" has been created successfully!`,
         html: [
           "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">",
