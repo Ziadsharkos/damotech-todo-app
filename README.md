@@ -87,7 +87,7 @@ npm start
 
 ### Data Flow
 
-\`\`\`
+```
 ┌─────────────────────────────────────────────────────┐
 │               User Interface (Angular)              │
 └─────────────────────────────────────────────────────┘
@@ -101,7 +101,7 @@ npm start
       │                 │                 │
       └─────────────────┴─────────────────┘
               Real-time Sync & Security
-\`\`\`
+```
 
 ### Key Architectural Decisions
 
@@ -145,18 +145,18 @@ Implemented with Firebase Auth's `browserLocalPersistence`:
 - Handles session management
 
 **2. Firestore Security Rules**
-\`\`\`javascript
+```
 // Users can only access their own data
 allow read: if request.auth.uid == resource.data.userId;
 allow create: if request.auth.uid == request.resource.data.userId;
-\`\`\`
+```
 
 **3. Cloud Functions Auth Checks**
-\`\`\`typescript
+```typescript
 if (!request.auth) {
   throw new Error("User must be authenticated");
 }
-\`\`\`
+```
 
 **Result:** Users can **only** access their own data, even if they try to manipulate API calls.
 
@@ -195,7 +195,7 @@ if (!request.auth) {
 
 ### Build and Deploy
 
-\`\`\`bash
+```
 # Build for production
 ng build --configuration production
 
@@ -206,7 +206,7 @@ firebase deploy
 firebase deploy --only hosting
 firebase deploy --only functions
 firebase deploy --only firestore:rules
-\`\`\`
+```
 
 ### Deployment URLs
 
@@ -219,7 +219,7 @@ firebase deploy --only firestore:rules
 
 Professional branching strategy:
 
-\`\`\`
+```
 main (production)
 └── develop (integration)
     ├── feature/firebase-setup
@@ -227,7 +227,7 @@ main (production)
     ├── feature/todo-management
     ├── feature/cloud-functions-integration
     └── feature/branding-and-titles
-\`\`\`
+```
 
 **Commit Convention:** Conventional Commits
 - `feat:` New features
