@@ -64,7 +64,8 @@
 Simply visit: https://damotech-todo-app.web.app
 
 **Option 2: Run Locally**
-\`\`\`bash
+
+```
 # Clone repository
 git clone https://github.com/Ziadsharkos/damotech-todo-app.git
 cd damotech-todo-app
@@ -76,7 +77,7 @@ npm install
 npm start
 
 # Visit http://localhost:4200
-\`\`\`
+```
 
 **No Firebase configuration needed!** The app connects to the deployed Firebase backend automatically.
 
